@@ -1,3 +1,5 @@
+import { store } from './store'
+
 let hasStarted = false
 const INTERVAL = 10
 let elapsed = -INTERVAL
@@ -16,6 +18,7 @@ const initialize = () => {
     elapsed += INTERVAL
     const diff = getElapsedSince(start) - elapsed
 
+    store.dispatch({ type: 'INCREMENT', payload: elapsed })
     debugModal.innerText = elapsed
     setTimeout(incrementTime, INTERVAL - diff)
   }
@@ -24,8 +27,12 @@ const initialize = () => {
   hasStarted = true
 }
 
+window.store = store
+window.initialize = initialize
+
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
     console.log(elapsed)
   }
 })
+
