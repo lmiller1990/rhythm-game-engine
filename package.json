@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "awesome-typescript-loader": "^5.2.1",
     "redux": "^4.0.1",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.4000",
