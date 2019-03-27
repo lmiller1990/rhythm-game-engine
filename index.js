@@ -1,4 +1,5 @@
 import { store } from './store'
+import { judge } from './engine/judgement'
 
 let hasStarted = false
 const INTERVAL = 10
@@ -19,7 +20,7 @@ const initialize = () => {
     const diff = getElapsedSince(start) - elapsed
 
     store.dispatch({ type: 'INCREMENT', payload: elapsed })
-    debugModal.innerText = elapsed
+    debugModal.innerText = store.getState().engine.time
     setTimeout(incrementTime, INTERVAL - diff)
   }
 
@@ -32,7 +33,6 @@ window.initialize = initialize
 
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
-    console.log(elapsed)
   }
 })
 

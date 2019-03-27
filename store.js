@@ -1,6 +1,6 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
-const time = (state = { time: 0 }, action) => {
+const engine = (state = { time: 0 }, action) => {
   switch (action.type) {
     case 'INCREMENT': 
       return { ...state, time: action.payload }
@@ -9,7 +9,9 @@ const time = (state = { time: 0 }, action) => {
   }
 }
 
-const store = createStore(time)
+const store = createStore(combineReducers({
+  engine
+}))
 
 export {
   store
