@@ -2,7 +2,7 @@ const path = require('path')
 const { CheckerPlugin } = require('awesome-typescript-loader')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   devtool: 'source-map',
 
   output: {
