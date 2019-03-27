@@ -1,17 +1,28 @@
 import { IJudgement } from './types'
 
-const judge = (timeInMs: number, notes: number[]): IJudgement => {
-  const closest = notes.reduce<IJudgement>((best, beat) => {
-    const diff = Math.abs(timeInMs - beat)
+import { INote } from '../types/song'
 
-    if (diff < best.diff) {
-      return { beat, diff }
+interface INoteWithJudgement {
+  note: INote
+  judgement: IJudgement
+}
+
+const judge = (timeInMs: number, notes: INote[]): INoteWithJudgement => {
+  let diff: number =  timeInMs - notes[0].timestamp
+  let bestNote: INote = notes[0]
+
+  for (const note of notes) {
+    if (Math.abs(note.timestamp - timeInMs) < Math.abs(diff)) {
+      bestNote = note
     }
+  }
 
-    return best
-  }, { beat: notes[0], diff: Math.abs(timeInMs - notes[0]) })
-
-  return closest
+  return {
+    note: bestNote,
+    judgement: {
+      diff: timeInMs - bestNote.timestamp
+    }
+  }
 }
 
 export {
