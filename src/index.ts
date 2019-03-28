@@ -20,9 +20,8 @@ const initialize = () => {
   const incrementTime = () => {
     elapsed += INTERVAL
     const diff = getElapsedSince(start) - elapsed
-
-    store.dispatch({ type: 'INCREMENT', payload: elapsed })
-    debugModal.innerText = store.getState().engine.time
+    store.dispatch(incrementCurrentTime({ time: elapsed }))
+    debugModal.innerText = store.getState().engine.time.toString()
     setTimeout(incrementTime, INTERVAL - diff)
   }
 
