@@ -1,6 +1,5 @@
 import { store } from './store'
-import { judge } from './engine/judgement'
-import { mySong } from './data/testSong'
+import { judge } from './store/engine/utils'
 import { incrementCurrentTime } from './store/engine/actions'
 
 let hasStarted = false

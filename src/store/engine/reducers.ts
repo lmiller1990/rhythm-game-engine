@@ -1,11 +1,6 @@
-import * as actions from './actions'
-import { ActionType, getType } from 'typesafe-actions';
+import { getType } from 'typesafe-actions'
 
-type TActions = ActionType<typeof actions>
-
-interface IEngineState {
-  time: number
-}
+import { actions, TActions, IEngineState } from './types'
 
 const initialState: IEngineState = {
   time: 0
