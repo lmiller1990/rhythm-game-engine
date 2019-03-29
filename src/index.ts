@@ -1,6 +1,7 @@
 import { store } from './store'
 import { judge } from './store/engine/utils'
 import { incrementCurrentTime } from './store/engine/actions'
+import { updateNote } from './store/notes/actions';
 
 let hasStarted = false
 const INTERVAL = 10
@@ -35,15 +36,18 @@ window.initialize = initialize
 
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space') {
-    const result = judge(store.getState().engine.time, store.getState().songs.notes)
+    const notes = store.getState().notes.ids.map(x => store.getState().notes.all[x])
+    if (notes.length > 0) {
+      const result = judge(store.getState().engine.time, notes)
 
-    store.dispatch({
-      type: 'UPDATE_NOTE',
-      payload: {
-        ...result.note, 
-        touchedAt: result.note.timestamp + result.judgement.diff
-      }
-    })
+      store.dispatch(updateNote({
+        note: {
+          ...result.note,
+          touchedAt: result.note.timestamp + result.judgement.diff
+        }
+      }))
+      window.console.log(result)
+    }
   }
 })
 

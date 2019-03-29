@@ -3,8 +3,16 @@ import { getType } from 'typesafe-actions'
 import { actions, TActions, INotesState } from './types'
 
 const initialState: INotesState = {
-  ids: [],
-  all: {}
+  ids: [
+    1
+  ],
+  all: {
+    '1': {
+      id: '1',
+      timestamp: 1000,
+      touchedAt: null
+    }
+  }
 }
 
 const notesReducer = (state: INotesState = initialState, action: TActions): INotesState => {

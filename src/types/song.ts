@@ -5,6 +5,7 @@ interface INote {
 }
 
 interface ISong {
+  id: number
   name: string
   bpm: number
   notes: INote[]
