@@ -1,7 +1,8 @@
 import { store } from './store'
-import { judge } from './store/engine/utils'
+import { judge } from './engine/judge'
 import { incrementCurrentTime } from './store/engine/actions'
 import { updateNote } from './store/notes/actions';
+import { judgedNotes } from './store/notes/selectors'
 
 let hasStarted = false
 const INTERVAL = 10
@@ -35,19 +36,32 @@ window.store = store
 window.initialize = initialize
 
 document.addEventListener('keydown', (e) => {
+  const output = document.getElementById('judge')
   if (e.code === 'Space') {
-    const notes = store.getState().notes.ids.map(x => store.getState().notes.all[x])
-    if (notes.length > 0) {
-      const result = judge(store.getState().engine.time, notes)
+    const untouchedNotes = store.getState().notes.ids.map(x => store.getState().notes.all[x]).filter(x => !x.touchedAt)
+    const bestNote = judge(store.getState().engine.time, untouchedNotes)
 
-      store.dispatch(updateNote({
-        note: {
-          ...result.note,
-          touchedAt: result.note.timestamp + result.judgement.diff
-        }
-      }))
-      window.console.log(result)
+    store.dispatch(updateNote({ 
+      note: {
+        ...bestNote,
+        touchedAt: elapsed,
+      }
+    }))
+
+    const judged = judgedNotes(store.getState().notes)
+    let txt = ''
+
+    for (const note of judged) {
+      txt += `
+        <div>id      : ${note.id}</div>
+        <div>Time    : ${note.timestamp}</div>
+        <div>Touched : ${note.touchedAt}</div>
+        <div>Diff    : ${note.timestamp - note.touchedAt}</div>
+        <br>
+      `
     }
+
+    output.innerHTML = txt
   }
 })
 

@@ -1,5 +1,5 @@
 interface INote {
-  id: string
+  id: number
   timestamp: number
   touchedAt: number | null
 }

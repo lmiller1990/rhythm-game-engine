@@ -4,10 +4,6 @@ import * as actions from './actions'
 
 type TActions = ActionType<typeof actions>
 
-interface IJudgement {
-  diff: number
-}
-
 interface IEngineState {
   time: number
 }
@@ -15,6 +11,5 @@ interface IEngineState {
 export {
   actions,
   TActions,
-  IEngineState,
-  IJudgement
+  IEngineState
 }

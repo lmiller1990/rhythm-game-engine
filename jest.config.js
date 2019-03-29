@@ -3,5 +3,8 @@ module.exports = {
   testEnvironment: 'node',
   modulePaths: [
     '<rootDir>'
+  ],
+  setupFiles: [
+    'jest-plugin-context/setup'
   ]
 };
