@@ -8,7 +8,13 @@ const notes: INote[] = [
 ]
 
 test('returns the best matching untouched note', () => {
-  const actual = judge(2100, notes)
+  const actual = judge(2900, notes)
 
   expect(actual).toBe(notes[2])
+})
+
+test('returns null when all notes outside max timing window', () => {
+  const actual = judge(100000, notes)
+
+  expect(actual).toBeNull()
 })

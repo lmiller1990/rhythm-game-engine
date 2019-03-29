@@ -41,7 +41,11 @@ document.addEventListener('keydown', (e) => {
     const untouchedNotes = store.getState().notes.ids.map(x => store.getState().notes.all[x]).filter(x => !x.touchedAt)
     const bestNote = judge(store.getState().engine.time, untouchedNotes)
 
-    store.dispatch(updateNote({ 
+    if (!bestNote) {
+      return
+    }
+
+    store.dispatch(updateNote({
       note: {
         ...bestNote,
         touchedAt: elapsed,

@@ -3,12 +3,15 @@ import { getType } from 'typesafe-actions'
 import { actions, TActions, INotesState } from './types'
 import { initialNotesState } from '../../data/testNotes'
 
-const initialState: INotesState = {
+const initialState: INotesState = process.env.NODE_ENV === 'test' 
+? {
   all: {},
   ids: []
 }
+: initialNotesState
 
-const notesReducer = (state: INotesState = initialNotesState, action: TActions): INotesState => {
+
+const notesReducer = (state: INotesState = initialState, action: TActions): INotesState => {
   switch (action.type) {
     case getType(actions.updateNote):
       const ids = state.all[action.payload.note.id]

@@ -1,4 +1,5 @@
 import { INote } from 'src/types/song'
+import { NOTE_OUTER_WINDOW_MS } from './constants';
 
 const judge = (timeInMs: number, notes: INote[]): INote | null => {
   let diff: number =  timeInMs - notes[0].timestamp
@@ -13,6 +14,10 @@ const judge = (timeInMs: number, notes: INote[]): INote | null => {
       bestNote = note
       diff = note.timestamp - timeInMs
     }
+  }
+
+  if (Math.abs(bestNote.timestamp - timeInMs) > NOTE_OUTER_WINDOW_MS) {
+    return null
   }
 
   return bestNote
