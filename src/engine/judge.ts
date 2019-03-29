@@ -1,12 +1,13 @@
 import { INote } from 'src/types/song'
 import { NOTE_OUTER_WINDOW_MS } from './constants';
+import { TColumns } from './types'
 
-const judge = (timeInMs: number, notes: INote[]): INote | null => {
+const judge = (column: TColumns, timeInMs: number, notes: INote[]): INote | null => {
   let diff: number =  timeInMs - notes[0].timestamp
   let bestNote: INote = notes[0]
 
   for (const note of notes) {
-    if (note.touchedAt) {
+    if (note.touchedAt || note.column !== column) {
       continue
     }
 

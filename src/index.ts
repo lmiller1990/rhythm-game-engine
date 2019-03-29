@@ -35,11 +35,15 @@ window.store = store
 // @ts-ignore
 window.initialize = initialize
 
+const columnKeys = ['ShiftLeft', 'ShiftRight']
+
 document.addEventListener('keydown', (e) => {
   const output = document.getElementById('judge')
-  if (e.code === 'Space') {
+  if (columnKeys.includes(e.code)) {
     const untouchedNotes = store.getState().notes.ids.map(x => store.getState().notes.all[x]).filter(x => !x.touchedAt)
-    const bestNote = judge(store.getState().engine.time, untouchedNotes)
+    const bestNote = judge(
+      e.code === 'ShiftLeft' ? 1 : 2,
+      store.getState().engine.time, untouchedNotes)
 
     if (!bestNote) {
       return
