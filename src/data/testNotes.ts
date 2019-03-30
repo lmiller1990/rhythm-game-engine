@@ -7,7 +7,7 @@ const initialNotesState: INotesState = {
   ids,
   all: ids.reduce<{ [id: string]: INote }>((acc, curr) => {
     acc[curr] = {
-      column: 1,
+      column: curr % 2 === 0 ? 1 : 2,
       id: curr,
       timestamp: curr * 1000,
       touchedAt: null

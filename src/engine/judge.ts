@@ -3,8 +3,8 @@ import { NOTE_OUTER_WINDOW_MS } from './constants';
 import { TColumns } from './types'
 
 const judge = (column: TColumns, timeInMs: number, notes: INote[]): INote | null => {
-  let diff: number =  timeInMs - notes[0].timestamp
-  let bestNote: INote = notes[0]
+  let diff: number =  Infinity
+  let bestNote: INote | null;
 
   for (const note of notes) {
     if (note.touchedAt || note.column !== column) {
@@ -17,10 +17,11 @@ const judge = (column: TColumns, timeInMs: number, notes: INote[]): INote | null
     }
   }
 
-  if (Math.abs(bestNote.timestamp - timeInMs) > NOTE_OUTER_WINDOW_MS) {
+  if (!bestNote || Math.abs(bestNote.timestamp - timeInMs) > NOTE_OUTER_WINDOW_MS) {
     return null
   }
 
+  console.log( bestNote )
   return bestNote
 }
 

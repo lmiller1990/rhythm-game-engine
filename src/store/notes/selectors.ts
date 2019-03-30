@@ -1,6 +1,6 @@
 import { INote } from 'src/types/song'
 import { INotesState } from './types'
-import { NOTE_OUTER_WINDOW_MS } from 'src/engine/constants'
+import { NOTE_OUTER_WINDOW_MS } from '../../engine/constants'
 
 const judgedNotes = (state: INotesState): INote[] => {
   return state.ids.reduce<INote[]>((acc, curr) => {
