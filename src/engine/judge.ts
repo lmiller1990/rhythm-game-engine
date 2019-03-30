@@ -21,7 +21,6 @@ const judge = (column: TColumns, timeInMs: number, notes: INote[]): INote | null
     return null
   }
 
-  console.log( bestNote )
   return bestNote
 }
 
