@@ -1,10 +1,20 @@
-import { INote } from 'src/types/song'
+import { INote } from '../../types/song'
 import { INotesState } from './types'
 import { NOTE_OUTER_WINDOW_MS } from '../../engine/constants'
 
 const judgedNotes = (state: INotesState): INote[] => {
   return state.ids.reduce<INote[]>((acc, curr) => {
     if (state.all[curr].touchedAt) {
+      acc = [...acc, state.all[curr] ]
+    }
+
+    return acc
+  }, [])
+}
+
+const untouchedNotes = (state: INotesState): INote[] => {
+  return state.ids.reduce<INote[]>((acc, curr) => {
+    if (!state.all[curr].touchedAt) {
       acc = [...acc, state.all[curr] ]
     }
 
@@ -24,5 +34,6 @@ const missedNotes = (elapsed: number, state: INotesState): INote[] => {
 
 export {
   judgedNotes,
-  missedNotes
+  missedNotes,
+  untouchedNotes
 }

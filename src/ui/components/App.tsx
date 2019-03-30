@@ -1,12 +1,14 @@
 import * as React from 'react'
 
-interface IProps {
-  msg: string
-}
+import { DebugContainer } from './debug/DebugContainer'
 
-class App extends React.PureComponent<IProps> {
+class App extends React.PureComponent {
   public render(): JSX.Element {
-    return <div>{this.props.msg}</div>
+    return (
+      <div>
+        <DebugContainer />
+      </div>
+    )
   }
 }
 

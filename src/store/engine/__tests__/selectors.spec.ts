@@ -1,6 +1,6 @@
-import { judgedNotes, missedNotes } from 'src/store/notes/selectors'
-import { INotesState } from 'src/store/notes/types'
-import { note } from 'test/factories/notes'
+import { judgedNotes, missedNotes, untouchedNotes } from '../../../store/notes/selectors'
+import { INotesState } from '../../../store/notes/types'
+import { note } from '../../../../test/factories/notes'
 
 describe('notesSelectors', () => {
   describe('judgedNotes', () => {
@@ -20,6 +20,26 @@ describe('notesSelectors', () => {
       const actual = judgedNotes(state)
 
       expect(actual).toEqual([ state.all[2] ])
+    })
+  })
+
+  describe('untouchedNotes', () => {
+    it('returns notes yet to be judged', () => {
+      const state: INotesState = {
+        all: { 
+          1: {
+            ...note, id: 1, touchedAt: null
+          },
+          2: {
+            ...note, id: 2, touchedAt: 1000
+          }
+        },
+        ids: [1, 2]
+      }
+
+      const actual = untouchedNotes(state)
+
+      expect(actual).toEqual([ state.all[1] ])
     })
   })
 
