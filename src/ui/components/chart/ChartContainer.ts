@@ -9,7 +9,8 @@ import { untouchedNotes } from '../../../store/notes/selectors';
 
 const mapStateToProps = (state: IState): IStateProps => {
   return {
-    notes: untouchedNotes(state.notes)
+    notes: untouchedNotes(state.notes),
+    time: state.engine.time
   }
 }
 
