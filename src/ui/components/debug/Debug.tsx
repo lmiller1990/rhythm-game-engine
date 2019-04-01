@@ -27,14 +27,20 @@ class Debug extends React.PureComponent<TProps> {
   }
 
   render(): JSX.Element {
-    const { time, start } = this.props
+    const { time, start, notes } = this.props
 
     return (
-      <div>
+      <div style={{ fontSize: '30px', marginRight: '10px' }}>
         Time: {time}
         <button onClick={start}>
           Start
         </button>
+        <div>Notes:</div>
+        {notes.map(note => 
+          <div key={note.id}>
+            Timing: {note.touchedAt ? note.touchedAt - note.timestamp : ''}
+          </div>
+        )}
       </div>
     )
   }

@@ -2,6 +2,7 @@ import { INote } from '../../../types/song'
 
 interface IStateProps {
   time: number
+  notes: INote[]
   untouchedNotes: INote[]
 }
 

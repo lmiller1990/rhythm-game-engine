@@ -1,4 +1,4 @@
-import { TColumns } from 'src/engine/types'
+import { TColumns } from '../engine/types'
 
 interface INote {
   id: number

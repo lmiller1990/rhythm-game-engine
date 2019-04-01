@@ -12,12 +12,14 @@ class Chart extends React.PureComponent<TProps> {
   public render(): JSX.Element {
     return (
       <div style={{ display: 'relative' }}>
+        <div style={{ display: 'absolute', width: '200px', border: '10px solid grey' }}>Targets</div>
         {this.props.notes.map(note => {
           return (
             <div 
               key={note.id}
               style={{ 
                 position: 'absolute',
+                margin: note.column === 2 ? '0 0 0 100px' : '0 100px 0 0',
                 border: '1px solid white',
                 top: this.position(note.timestamp) + 'px'
               }}
